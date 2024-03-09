@@ -1,0 +1,10 @@
+footer {
+  background: #176b87;
+  padding: 1rem 0;
+}
+
+div {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}

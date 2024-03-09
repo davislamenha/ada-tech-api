@@ -1,0 +1,10 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  color: #111;
+  width: 200px;
+}
+
+.btn-buy {
+  padding: 0.5rem 1rem;
+}
