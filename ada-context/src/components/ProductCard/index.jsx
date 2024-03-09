@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="cart">
       <img src={product.image} alt={product.title} />
-      <h3>{product.title}</h3>
+      <h3>{product.title.substring(0, 20) + '...'}</h3>
       <span>
         <b>Preço:</b>{' '}
         {product.price.toLocaleString('pt-br', {

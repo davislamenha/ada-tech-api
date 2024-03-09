@@ -3,8 +3,9 @@ footer {
   padding: 1rem 0;
 }
 
-div {
+footer .container {
   color: #fff;
   display: flex;
   justify-content: center;
+  font-size: 1.25rem;
 }

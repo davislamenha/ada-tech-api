@@ -1,10 +1,11 @@
 import React from 'react';
 import ProductCard from '../ProductCard';
 import PropTypes from 'prop-types';
+import './ProductList.css';
 
 const ProductList = ({ products }) => {
   return (
-    <ul>
+    <ul className="products-list container">
       {products.length > 0 &&
         products.map((product) => {
           return (

@@ -13,14 +13,15 @@ const Home = () => {
     try {
       const { data } = await fakeStoreApi.get('/products');
       setProducts(data);
-      console.log(data);
     } catch (error) {
       throw new Error(error);
     }
   };
 
   return (
-    <main>
+    <main className="container">
+      <h2 className="title">Nossos produtos</h2>
+      <p className="subtitle">Os melhores produtos do mercado</p>
       <ProductList products={products} />
     </main>
   );
