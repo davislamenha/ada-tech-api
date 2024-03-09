@@ -14,7 +14,8 @@ header .container {
   justify-content: space-between;
 }
 
-a {
+a.cart-link {
+  position: relative;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   display: block;
@@ -25,6 +26,23 @@ a {
   transition: all 0.3s;
 }
 
-a:hover {
+a.cart-link:hover {
   opacity: 0.7;
+}
+
+.cart-quantity {
+  padding: 0.25rem;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 700;
+  content: '';
+  display: block;
+  background-color: #59344f;
+  color: #fff;
+  font-size: 1rem;
+  top: -12px;
+  right: -12px;
 }

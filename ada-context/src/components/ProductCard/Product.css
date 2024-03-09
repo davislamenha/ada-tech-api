@@ -1,4 +1,4 @@
-.cart {
+.cart-card {
   display: flex;
   flex-direction: column;
   color: #111;
@@ -6,22 +6,34 @@
   gap: 12px;
 }
 
+.cart-info {
+  display: block;
+}
+
 img {
   height: 200px;
   object-fit: contain;
 }
 
-.btn-buy {
+.btn-buy,
+.btn-remove {
   cursor: pointer;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-size: 1.25rem;
-  background: #176b87;
   color: #fff;
   font-weight: 700;
   transition: all 0.3s;
+}
+
+.btn-buy {
+  background: #176b87;
+}
+
+.btn-remove {
+  background: #e54;
 }
 
 .btn-buy:hover {
