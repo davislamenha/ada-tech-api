@@ -1,0 +1,16 @@
+header {
+  padding: 1rem 0;
+  background: #111;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #fff;
+}
