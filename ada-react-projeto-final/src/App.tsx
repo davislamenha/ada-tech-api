@@ -44,10 +44,18 @@ function App() {
   useEffect(() => {
     if (searchTerm.trim()) {
       const filteredProducts = products.filter((product) => {
-        return (
-          product.title.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-          product.category.toLowerCase().startsWith(searchTerm.toLowerCase())
-        );
+        const searchTermLower = searchTerm.toLowerCase();
+        const titleLower = product.title.toLowerCase();
+        const categoryLower = product.category.toLowerCase();
+
+        const titleMatch = titleLower
+          .split(' ')
+          .filter((word) => word.startsWith(searchTermLower));
+        const categoryMatch = categoryLower
+          .split(' ')
+          .filter((word) => word.startsWith(searchTermLower));
+
+        return titleMatch.length > 0 || categoryMatch.length > 0;
       });
 
       setFilteredProducts(filteredProducts);
