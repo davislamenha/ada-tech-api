@@ -38,8 +38,10 @@ export default function ProductsCard({ product }: ProductsCardProps) {
           maxWidth: 345,
           padding: "1rem",
           height: "360px",
-          boxShadow: "none",
-          border: "1px solid #222",
+          shadow: "0 6px 6px rgba(#000, 0.3)",
+          transition: "200ms",
+          background: "#fff",
+          borderRadius: "35px",
         }}
       >
         <CardMedia
@@ -57,8 +59,25 @@ export default function ProductsCard({ product }: ProductsCardProps) {
             {product.description.substring(0, 30) + "..."}
           </Typography>
         </CardContent>
-        <CardActions sx={{ marginTop: "auto" }}>
-          <Button size="small" onClick={handleOpen}>
+        <CardActions
+          sx={{
+            marginTop: "auto",
+            padding: "10px",
+          }}
+        >
+          <Button
+            onClick={handleOpen}
+            sx={{
+              "&.MuiButton-root": {
+                backgroundColor: "#bffa37",
+                color: "#82837e",
+                "&:hover": {
+                  backgroundColor: "#ffff",
+                  color: "#94b053"
+                },
+              },
+            }}
+          >
             Ver detalhes
           </Button>
         </CardActions>
