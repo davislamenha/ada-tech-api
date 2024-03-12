@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { Box, Button, Modal, Typography } from '@mui/material';
 import fakeApi from './api/api';
 import ProductsList from './components/ProductsList';
 import { IProduct } from './components/ProductsCard';
+import { SearchContext } from './context/SearchContext';
 
 const style = {
   position: 'absolute',
@@ -20,6 +21,8 @@ const style = {
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const { searchTerm } = useContext(SearchContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,12 +41,29 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (searchTerm.trim()) {
+      const filteredProducts = products.filter((product) => {
+        return (
+          product.title.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+          product.category.toLowerCase().startsWith(searchTerm.toLowerCase())
+        );
+      });
+
+      setFilteredProducts(filteredProducts);
+    }
+  }, [searchTerm, products]);
+
   return (
     <>
       <Header />
       <main>
         <div className="container">
-          <ProductsList products={products} />
+          {searchTerm.trim() ? (
+            <ProductsList products={filteredProducts} />
+          ) : (
+            <ProductsList products={products} />
+          )}
           <Button onClick={handleOpen}>Open modal</Button>
         </div>
       </main>
