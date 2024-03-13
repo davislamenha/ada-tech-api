@@ -23,6 +23,7 @@ function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const { searchTerm } = useContext(SearchContext);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -33,11 +34,16 @@ function App() {
 
   const getProducts = async () => {
     try {
+      setIsLoading(true);
       const { data } = await fakeApi.get('/products');
 
       setProducts(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,9 +74,9 @@ function App() {
       <main>
         <div className="container">
           {searchTerm.trim() ? (
-            <ProductsList products={filteredProducts} />
+            <ProductsList isLoading={isLoading} products={filteredProducts} />
           ) : (
-            <ProductsList products={products} />
+            <ProductsList isLoading={isLoading} products={products} />
           )}
           <Button onClick={handleOpen}>Open modal</Button>
         </div>
