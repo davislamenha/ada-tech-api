@@ -1,5 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
-import "./ProductModal.module.css";
+import { Box, Modal, Typography, Grid, Paper } from "@mui/material";
 
 interface IModal {
   isOpen: boolean;
@@ -25,47 +24,68 @@ export const ProductModal = ({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "50em",
     borderRadius: "8px",
     bgcolor: "#fff",
-    boxShadow: 4,
+    boxShadow: 6,
     p: 4,
+    padding: "51px 32px;",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
   };
   return (
-    <Modal
-      open={isOpen}
-      onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <Modal open={isOpen} onClose={onClose}>
       <Box sx={style}>
-        <Box display="flex" alignItems="center" padding="30px 40px">
-          <Box
-            display="flex"
-            flexGrow={1}
-            flexShrink={0}
-            flexBasis="10px"
-            p={2}
-            bgcolor={"#115dd8"}
-            color={"#fff"}
-          >
-            {" "}
-          </Box>
-          <Typography variant="h6">{category}</Typography>
-        </Box>
-        <Typography id="modal-modal-title" variant="h3" component="h2">
-          {title.substring(0, title.indexOf(" ") + 1)}
-        </Typography>
-        <Typography id="modal-modal-title" variant="h5" component="h2">
-          {title.substring(title.indexOf(" ") + 1)}
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {description}
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {price}
-        </Typography>
-        <img src={picture} alt="" style={{ width: "100px" }} />
+        <Paper
+          sx={{
+            margin: "auto",
+            flexGrow: 1,
+            ...style,
+            "&.MuiPaper-root": {
+              border: "none",
+            },
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item>seta</Grid>
+            <Grid item>
+              <img
+                src={picture}
+                alt=""
+                style={{ width: "150px", height: "100%", objectFit: "contain" }}
+              />
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography variant="subtitle1" component="div" color="#94b053">
+                    {category}
+                  </Typography>
+                  <Typography variant="h5">
+                    {title.substring(0, title.indexOf(" ") + 1)}
+                  </Typography>
+                  <Typography variant="h6">
+                    {title.substring(title.indexOf(" ") + 1)}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {description}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {description}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Typography variant="subtitle1" component="div">
+                  Price: {price}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item>seta 2</Grid>
+          </Grid>
+        </Paper>
       </Box>
     </Modal>
   );
