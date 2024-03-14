@@ -63,15 +63,7 @@ export default function ProductsCard({ product }: ProductsCardProps) {
           </Button>
         </CardActions>
       </Card>
-      <ProductModal
-        isOpen={open}
-        onClose={handleClose}
-        title={product.title}
-        price={product.price}
-        category={product.category}
-        description={product.description}
-        picture={product.image}
-      />
+      <ProductModal product={product} isOpen={open} onClose={handleClose} />
     </>
   );
 }

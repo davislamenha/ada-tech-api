@@ -1,5 +1,5 @@
-import ProductsCard, { IProduct } from '../ProductsCard';
-import './ProductsList.css';
+import ProductsCard, { IProduct } from "../ProductsCard";
+import "./ProductsList.css";
 
 interface ProductsListProps {
   products: IProduct[];
