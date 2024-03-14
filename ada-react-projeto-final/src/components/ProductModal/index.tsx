@@ -1,24 +1,18 @@
 import { Box, Modal, Typography, Grid, Paper } from "@mui/material";
+import "./ProductModal.module.css";
+import { ChevronRight, ChevronLeft } from "lucide-react";
+import { IProduct } from "../ProductsCard";
+import { useState, useContext, useEffect } from "react";
+import { ProductContext } from "../../context/ProductsContext";
+
 
 interface IModal {
+  product: IProduct;
   isOpen: boolean;
   onClose: () => void;
-  title: string;
-  price: number;
-  category: string;
-  description: string;
-  picture: string;
 }
 
-export const ProductModal = ({
-  isOpen,
-  onClose,
-  title,
-  price,
-  category,
-  description,
-  picture,
-}: IModal) => {
+export const ProductModal = ({ product, isOpen, onClose }: IModal) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -35,6 +29,31 @@ export const ProductModal = ({
     alignItems: "center",
     gap: "10px",
   };
+
+  const [prod, setProd] = useState<IProduct>(product);
+  const { products, findProductIndexById } = useContext(ProductContext);
+  const [productIndex, setProductIndex] = useState<number>(
+    findProductIndexById(product.id)
+  );
+
+  useEffect(() => {
+    setProd(product);
+  }, []);
+
+  const handleNext = () => {
+    if (productIndex !== products.length - 1) {
+      setProd(products[productIndex + 1]);
+      setProductIndex((prev) => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (productIndex !== 0) {
+      setProd(products[productIndex - 1]);
+      setProductIndex((prev) => prev - 1);
+    }
+  };
+
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box sx={style}>
@@ -49,10 +68,13 @@ export const ProductModal = ({
           }}
         >
           <Grid container spacing={2}>
-            <Grid item>seta</Grid>
+            <Grid item> 
+          <button onClick={handlePrev}>
+            <ChevronLeft />
+          </button></Grid>
             <Grid item>
               <img
-                src={picture}
+                src={prod.image}
                 alt=""
                 style={{ width: "150px", height: "100%", objectFit: "contain" }}
               />
@@ -61,29 +83,33 @@ export const ProductModal = ({
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography variant="subtitle1" component="div" color="#94b053">
-                    {category}
+                    {prod.category}
                   </Typography>
                   <Typography variant="h5">
-                    {title.substring(0, title.indexOf(" ") + 1)}
+                    {prod.title.substring(0, title.indexOf(" ") + 1)}
                   </Typography>
                   <Typography variant="h6">
-                    {title.substring(title.indexOf(" ") + 1)}
+                    {prod.title.substring(title.indexOf(" ") + 1)}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {description}
+                    {prod.description}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {description}
+                    {prod.description}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1" component="div">
-                  Price: {price}
+                  Price: {prod.price}
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>seta 2</Grid>
+            <Grid item>
+          <button onClick={handleNext}>
+            <ChevronRight />
+          </button>
+            </Grid>
           </Grid>
         </Paper>
       </Box>

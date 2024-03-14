@@ -1,3 +1,4 @@
+function App() {
 import { useContext, useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -5,8 +6,9 @@ import { Box, Button, Modal, Typography } from '@mui/material';
 import fakeApi from './api/api';
 import ProductsList from './components/ProductsList';
 import { IProduct } from './components/ProductsCard';
-import { SearchContext } from './context/SearchContext';
+import { SearchContext, ProductContext } from './context/SearchContext';
 
+const { products, setProducts } = useContext(ProductContext);
 const style = {
   position: 'absolute',
   top: '50%',
@@ -28,6 +30,7 @@ function App() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -36,6 +39,7 @@ function App() {
     try {
       setIsLoading(true);
       const { data } = await fakeApi.get('/products');
+
 
       setProducts(data);
       setIsLoading(false);
@@ -82,22 +86,6 @@ function App() {
         </div>
       </main>
       <Footer />
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
     </>
   );
 }

@@ -1,3 +1,4 @@
+
 import { Skeleton } from '@mui/material';
 import ProductsCard, { IProduct } from '../ProductsCard';
 import './ProductsList.css';
