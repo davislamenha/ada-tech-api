@@ -1,3 +1,4 @@
+import SearchBar from '../SearchBar';
 import './Header.css';
 
 const Header = () => {
@@ -5,6 +6,7 @@ const Header = () => {
     <header>
       <div className="container">
         <h1>Ada Shop</h1>
+        <SearchBar />
       </div>
     </header>
   );
